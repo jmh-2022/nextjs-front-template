@@ -3,24 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "local:dev": "env-cmd -f ./env/.env.local next dev -p 3030",
+    "local:build": "env-cmd -f ./env/.env.local next build",
+    "local:start": "env-cmd -f ./env/.env.local next start -p 3030",
+    "dev:dev": "env-cmd -f .env next dev -p 3030",
+    "dev:build": "env-cmd -f .env next build",
+    "dev:start": "env-cmd -f .env next start -p 3030",
+    "staging:dev": "env-cmd -f .env.staging next dev -p 3030",
+    "staging:build": "env-cmd -f .env.staging next build",
+    "staging:start": "env-cmd -f .env.staging next start -p 3030",
+    "prod:dev": "env-cmd -f .env.production next dev -p 3030",
+    "prod:build": "env-cmd -f .env.production next build",
+    "prod:start": "env-cmd -f .env.production next start -p 3030",
+    "lint": "next lint",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.55.4",
+    "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.9"
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.9",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.9"
+    "typescript": "^5"
   }
 }
