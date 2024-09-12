@@ -1,6 +1,6 @@
-import { MainColumn } from '@/components/atoms';
+import MainFooter from '@/components/template/MainFooter';
 import React from 'react';
 
 export default function Page() {
-  return <MainColumn>상품 메인</MainColumn>;
+  return <MainFooter>매거진 메인</MainFooter>;
 }

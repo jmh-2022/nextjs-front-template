@@ -1,16 +1,11 @@
 import { makeClass } from '@/utils/util';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-type TextProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLParagraphElement>,
-  HTMLParagraphElement
->;
+type TextProps = DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>;
 
 export type TitleProps = TextProps & {
   numberOfLines?: number;
 };
-
-type ClassNameValue = string | boolean | null | undefined;
 
 //제목 영역
 /**
@@ -22,10 +17,7 @@ type ClassNameValue = string | boolean | null | undefined;
  * @returns {*}
  */
 export const Title1 = ({ className: _className, ...props }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-title1 font-medium whitespace-normal',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-title1 font-medium whitespace-normal', _className);
 
   return <p {...props} className={className} />;
 };
@@ -55,10 +47,7 @@ export const Subtitle1 = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-subtitle1 font-medium',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-subtitle1 font-medium', _className);
 
   return <p {...props} className={className} />;
 };
@@ -68,10 +57,7 @@ export const Subtitle2 = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-subtitle2 font-medium',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-subtitle2 font-medium', _className);
 
   return <p {...props} className={className} />;
 };
@@ -81,10 +67,7 @@ export const BodyStrong = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-body-strong font-bold',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-body-strong font-bold', _className);
 
   return <p {...props} className={className} />;
 };
@@ -93,10 +76,7 @@ export const BodyStrong2 = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-body-strong2 font-bold',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-body-strong2 font-bold', _className);
 
   return <p {...props} className={className} />;
 };
@@ -115,10 +95,7 @@ export const Caption1Strong = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-caption1-strong font-bold',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-caption1-strong font-bold', _className);
 
   return <p {...props} className={className} />;
 };
@@ -128,10 +105,7 @@ export const Caption1 = ({
 
   ...props
 }: TitleProps) => {
-  const className = makeClass(
-    'font-spoqa text-caption1 font-regular',
-    _className,
-  );
+  const className = makeClass('font-spoqa text-caption1 font-regular', _className);
 
   return <p {...props} className={className} />;
 };
@@ -150,9 +124,7 @@ export const Caption2 = ({
 
   ...props
 }: TitleProps) => {
-  const className = ['font-spoqa text-caption2 font-regular', _className].join(
-    ' ',
-  );
+  const className = ['font-spoqa text-caption2 font-regular', _className].join(' ');
 
   return <p {...props} className={className} />;
 };

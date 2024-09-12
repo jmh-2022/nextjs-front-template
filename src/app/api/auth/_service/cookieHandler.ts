@@ -140,7 +140,7 @@ export async function deleteJWTCookies() {
   cookies().delete(CookieKeys.refreshToken);
 }
 
-export function applySetCookie(req: NextRequest, res: NextResponse): void {
+export async function applySetCookie(req: NextRequest, res: NextResponse) {
   const resCookies = new ResponseCookies(res.headers);
   const newReqHeaders = new Headers(req.headers);
   const newReqCookies = new RequestCookies(newReqHeaders);
