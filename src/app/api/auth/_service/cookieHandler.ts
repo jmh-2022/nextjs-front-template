@@ -3,17 +3,12 @@
 import { CookieKeys } from '@/constants/cookieKey';
 import { parseJwt } from '@/utils/util';
 import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { ResponseCookies, RequestCookies } from 'next/dist/compiled/@edge-runtime/cookies';
 
 const env = process.env.NEXT_PUBLIC_ENV_TYPE;
 
-export async function createJWTCookies({
-  accessToken,
-  refreshToken,
-}: {
-  accessToken: string;
-  refreshToken: string;
-}) {
+export async function createJWTCookies({ accessToken, refreshToken }: { accessToken: string; refreshToken: string }) {
   const refreshTokenJwt = parseJwt(refreshToken);
   const accessTokenJwt = parseJwt(accessToken);
 
@@ -129,8 +124,34 @@ export async function deleteJWTCookiesInMiddleware(res: NextResponse<unknown>) {
   });
 }
 
+export const createSessionCookie = ({ res, userKey }: { userKey: string; res: NextResponse<unknown> }) => {
+  const sameSite = 'lax';
+  const path = '/';
+  res.cookies.set(CookieKeys.clientUserKey, userKey, {
+    httpOnly: false,
+    sameSite,
+    path,
+  });
+};
+
 export async function deleteJWTCookies() {
   cookies().delete(CookieKeys.clientAccessToken);
   cookies().delete(CookieKeys.accessToken);
   cookies().delete(CookieKeys.refreshToken);
+}
+
+export function applySetCookie(req: NextRequest, res: NextResponse): void {
+  const resCookies = new ResponseCookies(res.headers);
+  const newReqHeaders = new Headers(req.headers);
+  const newReqCookies = new RequestCookies(newReqHeaders);
+
+  resCookies.getAll().forEach((cookie) => newReqCookies.set(cookie));
+
+  NextResponse.next({
+    request: { headers: newReqHeaders },
+  }).headers.forEach((value, key) => {
+    if (key === 'x-middleware-override-headers' || key.startsWith('x-middleware-request-')) {
+      res.headers.set(key, value);
+    }
+  });
 }
